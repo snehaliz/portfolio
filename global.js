@@ -86,4 +86,21 @@ document.addEventListener('DOMContentLoaded',() => {
     setColorScheme(event.target.value);
   });
 
+  const form = document.querySelector('.contact-form')
+  form?.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const data = new FormData(form);
+    let url = form.action + '?';
+
+    for (let [name, value] of data) {
+      if (url.slice(-1)!== '?') {
+        url += '&';
+      }
+      url += `${name}=${encodeURIComponent(value)}`;
+    }
+    
+    console.log('Constructed URL:', url);
+    location.href = url;
+  });
 });
